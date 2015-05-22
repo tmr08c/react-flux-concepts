@@ -21,11 +21,29 @@
 	*/
 
 
+  var RecipeListItem = React.createClass({
+    render: function() {
+      return(
+        <li>
+          I am an item in the recipe list
+        </li>
+      );
+    }
+  });
+
 	var RecipeList = React.createClass({
 	  render: function() {
 	    return (
 	      <div>
 	      	RecipeList component text
+          <ul>
+            <RecipeListItem/>
+            <RecipeListItem/>
+            <RecipeListItem/>
+            <RecipeListItem/>
+            <RecipeListItem/>
+            <RecipeListItem/>
+          </ul>
 	      </div>
 	    );
 	  }
