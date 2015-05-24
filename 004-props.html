@@ -23,6 +23,23 @@
 	*/
 
 
+  var IngredientList = React.createClass({
+    render: function() {
+      return (
+        <div>
+          <h2>Ingredients</h2>
+          <ul>
+            {
+              this.props.ingredients.split(',').map(function(ingredient){
+                return <li>{ingredient}</li>
+              })
+            }
+          </ul>
+        </div>
+      );
+    }
+  });
+
 	var Recipe = React.createClass({
 		getInitialState: function () {
 			/* remember, we really invoked a function and passed in args. */
@@ -34,14 +51,9 @@
 	    return (
 	      <div>
 	        <h1> {this.props.title} </h1>
-          <h2>Ingredients</h2>
-          <ul>
-            {
-              this.props.ingredients.split(',').map(function(ingredient){
-                return <li>{ingredient}</li>
-              })
-            }
-          </ul>
+          <IngredientList
+            ingredients={this.props.ingredients}
+          />
           <h2>Instructions</h2>
 	        <p> {this.props.instructions} </p>
 	      </div>
