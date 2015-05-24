@@ -33,7 +33,16 @@
 	  render: function() {
 	    return (
 	      <div>
-	        <h2> {this.props.title} </h2>
+	        <h1> {this.props.title} </h1>
+          <h2>Ingredients</h2>
+          <ul>
+            {
+              this.props.ingredients.split(',').map(function(ingredient){
+                return <li>{ingredient}</li>
+              })
+            }
+          </ul>
+          <h2>Instructions</h2>
 	        <p> {this.props.instructions} </p>
 	      </div>
 	    );
@@ -47,10 +56,12 @@
 	      	<Recipe
 	      		title="Stuffed Chard"
 	      		instructions="Stuff the chard..."
+            ingredients="Chard, Stuffing"
 	      	/>
 	      	<Recipe
 	      		title="Eggplant and Polenta"
 	      		instructions="Put the eggplant in the oven..."
+            ingredients="Eggplant, Polenta"
 	      	/>
 	      </div>
 	    );
