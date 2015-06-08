@@ -33,8 +33,12 @@
 
         _recipes = [];
 
-        function addRecipe(text){
-            _recipes.push(text);
+        function addRecipe(record){
+            _recipes.push(record._id);
+        }
+
+        function addCatResponse(text){
+          _recipes.push("Meow " + text._numberOfMeows + " times");
         }
 
         var RecipeStore = Flux.createStore({
@@ -43,8 +47,12 @@
             }
         }, function(payload){
             if(payload.actionType === "ADD_RECIPE") {
-                addRecipe(payload.text);
+                addRecipe(payload.record);
                 RecipeStore.emitChange();
+            }
+            else if(payload.actionType == "ADD_CAT_RESONSE"){
+              addCatResponse(payload.text);
+              RecipeStore.emitChange();
             }
         });
 
@@ -54,8 +62,14 @@
             addRecipe: function(text){
                return {
                   actionType: "ADD_RECIPE",
-                  text: text
+                  record: text
                }
+            },
+            askACat: function(text){
+              return {
+                actionType: "ADD_CAT_RESONSE",
+                text: text
+              }
             }
         });
 
@@ -84,17 +98,21 @@
 
         var Recipes = React.createClass({
             addRecipe: function(){
-                RecipeActions.addRecipe({_id: Math.floor(Math.random()*1000000)});
+                RecipeActions.addRecipe({_id: Math.floor(Math.random()*1000000), cat: 'fluffy'});
+            },
+            askACat: function(){
+                RecipeActions.askACat({_numberOfMeows: Math.floor(Math.random()*10)});
             },
             render: function() {
                 return (
                 <div className="recipes_app">
                     <ul className="recipes">
                         { this.props.recipes.map(function(recipe, index){
-                            return <li key={index}>recipe {index} : {recipe._id}</li>
+                            return <li key={index}>recipe {index} : {recipe}</li>
                         })}
                     </ul>
                     <button onClick={this.addRecipe}>Add recipe</button>
+                    <button onClick={this.askACat}>Ask A Cat</button>
                 </div>
                 )
             }
@@ -104,5 +122,3 @@
     </script>
 </body>
 </html>
-
-
