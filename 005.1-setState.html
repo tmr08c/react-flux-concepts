@@ -36,18 +36,21 @@
           });
         },
         handleHover: function() {
+          console.log("I am setting state");
           this.setState({
             isHovered: !this.state.isHovered
           });
         },
         renderDropdown: function () {
           return (
-            <div style={{ background: "#ccc" }}>
+            <div onClick=""  style={{ background: "#ccc" }}>
               I am a dropdown!
             </div>
           );
         },
+        // bug where clicking dropdown inverts when hover is true
         render : function() {
+          console.log("Set has changed so I am re-rendering.");
           var dropdown = this.state.dropDownIsOpen ? this.renderDropdown() : null;
           var divStyle = {
             backgroundColor: this.state.isHovered ? 'red' : ''
